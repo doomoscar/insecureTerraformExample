@@ -4,6 +4,7 @@ resource "aws_security_group_rule" "my-rule" {
     description = "my rule"
 }
 
+#This is just a comment
 resource "aws_alb_listener" "my-alb-listener" {
     port     = "443"
     protocol = "HTTPS"
