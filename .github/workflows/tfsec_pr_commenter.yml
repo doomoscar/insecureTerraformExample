@@ -1,6 +1,6 @@
 name: tfsec-pr-commenter
 on:
-  push:
+  pull_request:
     
 jobs:
   tfsec:
@@ -17,6 +17,5 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
-          tfsec_formats: sarif
-          tfsec_args: --soft-fail --minimum-severity HIGH
+          tfsec_formats: sarif csv
           github_token: ${{ github.token }}
