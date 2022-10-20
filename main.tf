@@ -4,6 +4,12 @@ resource "aws_security_group_rule" "my-rule" {
     description = "my rule"
 }
 
+resource "aws_security_group_rule" "public" {
+    type = "ingress"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+
 #This is just a comment
 resource "aws_alb_listener" "my-alb-listener" {
     port     = "443"
