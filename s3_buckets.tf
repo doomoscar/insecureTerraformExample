@@ -25,3 +25,18 @@ resource "aws_lb" "test-2" {
   subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
   internal = true
 }
+
+
+resource "aws_lb" "test1241" {
+  name = "test1241"
+  load_balancer_type = "application"
+  subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
+  internal = false
+}
+
+resource "aws_lb" "test-3" {
+  name = "test-3"
+  load_balancer_type = "application"
+  subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
+  internal = true
+}
