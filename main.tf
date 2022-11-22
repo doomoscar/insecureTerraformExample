@@ -9,11 +9,9 @@ resource "aws_security_group_rule" "public-access" {
     cidr_blocks = ["0.0.0.0/0"]
 }
 
-
-#This is just a comment
 resource "aws_alb_listener" "my-alb-listener" {
-    port     = "443"
-    protocol = "HTTPS"
+    port     = "80"
+    protocol = "HTTP"
 }
 
 resource "aws_db_security_group" "my-group" {

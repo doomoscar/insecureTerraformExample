@@ -27,7 +27,7 @@ jobs:
         run: echo "matrix={\"files\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
 
   tfsec:
-    name: IaC Scan with tfsec
+    name: tfsec scan
     runs-on: ubuntu-latest
     needs: [changed-files]
     strategy:
