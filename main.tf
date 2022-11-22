@@ -40,3 +40,13 @@ resource "azurerm_managed_disk" "source" {
    rest_api_id   = aws_api_gateway_rest_api.example.id
    stage_name    = "example3"
  }
+
+ resource "aws_security_group_rule" "public-access2" {
+    type = "egress"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+resource "aws_alb_listener" "elb-listener" {
+    port     = "80"
+    protocol = "HTTP"
+}
