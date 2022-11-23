@@ -12,16 +12,9 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
-resource "aws_lb" "test" {
-  name = "test123"
-  load_balancer_type = "application"
-  subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
-  internal = true
-}
+resource "aws_s3_bucket" "bad_example" {
 
-resource "aws_lb" "test-2" {
-  name = "test1458"
-  load_balancer_type = "application"
-  subnets = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
-  internal = true
+    versioning {
+        enabled = false
+    }
 }
