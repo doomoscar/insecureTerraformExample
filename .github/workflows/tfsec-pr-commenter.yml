@@ -4,5 +4,5 @@ on:
   pull_request:
 jobs:
   tfsec:
-    uses: https://github.com/doomoscar/tfsec-workflow/.github/workflows/tfsec-pr-commenter.yml@main
+    uses: doomoscar/tfsec-workflow/.github/workflows/tfsec-pr-commenter.yml@main
 
