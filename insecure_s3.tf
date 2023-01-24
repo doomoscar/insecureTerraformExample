@@ -18,3 +18,16 @@ resource "aws_s3_bucket" "bad_example" {
         enabled = false
     }
 }
+
+resource "aws_security_group" "bad_example" {
+    egress {
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+ }
+
+ resource "aws_s3_bucket" "bad_example" {
+
+    versioning {
+        enabled = false
+    }
+}
