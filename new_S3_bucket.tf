@@ -92,6 +92,11 @@ variable "lifecycle_rules" {
   }
 }
 
+resource "aws_iam_role_policy_attachment" "replication" {
+  role       = aws_iam_role.replication.name
+  policy_arn = aws_iam_policy.replication.arn
+}
+
 resource "aws_s3_bucket" "example" {
   bucket = "logs-${var.region}-${var.environment}"
   acl    = "log-delivery-write"
@@ -99,6 +104,44 @@ resource "aws_s3_bucket" "example" {
   tags = local.tags[var.environment]
 
   force_destroy = true
+
+  object_lock_configuration {
+    object_lock_enabled = "Enabled"
+
+    rule {
+      default_retention {
+        mode = "COMPLIANCE"
+        days = 5
+      }
+    }
+  }
+
+  replication_configuration {
+    role = aws_iam_role.replication.arn
+
+    rules {
+      id     = "foobar"
+      status = "Enabled"
+
+      filter {
+        tags = {}
+      }
+      destination {
+        bucket        = aws_s3_bucket.destination.arn
+        storage_class = "STANDARD"
+
+        replication_time {
+          status  = "Enabled"
+          minutes = 15
+        }
+
+        metrics {
+          status  = "Enabled"
+          minutes = 15
+        }
+      }
+    }
+  }
 
   dynamic "lifecycle_rule" {
     for_each = try(jsondecode(var.lifecycle_rules[var.environment]), var.lifecycle_rules[var.environment])
