@@ -153,14 +153,6 @@ resource "aws_s3_bucket" "example" {
     }
   }
 
-  resource "aws_s3_bucket_public_access_block" "example" {
-    bucket = aws_s3_bucket.example.id
-
-    block_public_acls       = true
-    block_public_policy     = true
-    ignore_public_acls      = true
-    restrict_public_buckets = true
-  }
   resource "aws_kms_key" "mykey" {
     description             = "This key is used to encrypt bucket objects"
     deletion_window_in_days = 10
@@ -223,6 +215,15 @@ resource "aws_s3_bucket_policy" "example" {
   bucket = aws_s3_bucket.example.id
   policy = data.aws_iam_policy_document.bucket_example.json
 }
+
+resource "aws_s3_bucket_public_access_block" "example" {
+    bucket = aws_s3_bucket.example.id
+
+    block_public_acls       = True
+    block_public_policy     = True
+    ignore_public_acls      = True
+    restrict_public_buckets = True
+  }
 
 resource "aws_s3_bucket_inventory" "example" {
   bucket                   = aws_s3_bucket.example.id
